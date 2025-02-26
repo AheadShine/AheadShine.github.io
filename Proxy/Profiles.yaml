@@ -1,0 +1,21 @@
+port: 9137
+allow-lan: true
+mode: rule
+log-level: info
+proxies:
+  - name: HongKong
+    type: vmess
+    server: 38.47.123.21
+    port: 9137
+    uuid: 531f9aed-9db3-4f42-9efe-ba76ed9c4627
+    alterId: 0
+    cipher: auto
+proxy-groups: 
+  - name: Proxy
+    type: select
+    proxies:
+      - HongKong
+rules:
+  - GEOIP,LAN,DIRECT
+  - GEOIP,CN,DIRECT
+  - MATCH,Proxy
