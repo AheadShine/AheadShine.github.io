@@ -1,7 +1,3 @@
-port: 9137
-allow-lan: true
-mode: rule
-log-level: info
 proxies:
   - name: HongKong
     type: vmess
@@ -15,7 +11,3 @@ proxy-groups:
     type: select
     proxies:
       - HongKong
-rules:
-  - GEOIP,LAN,DIRECT
-  - GEOIP,CN,DIRECT
-  - MATCH,Proxy
