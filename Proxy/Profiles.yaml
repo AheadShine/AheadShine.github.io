@@ -1,7 +1,7 @@
 proxies:
   - name: HongKong
     type: vmess
-    server: 38.47.123.21
+    server: 206.237.13.65
     port: 9137
     uuid: 531f9aed-9db3-4f42-9efe-ba76ed9c4627
     alterId: 0
