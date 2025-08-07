@@ -1,14 +1,7 @@
 proxies:
-  - name: HongKong - Vmiss
+  - name: HongKong
     type: vmess
-    server: 38.47.122.56
-    port: 9137
-    uuid: 531f9aed-9db3-4f42-9efe-ba76ed9c4627
-    alterId: 0
-    cipher: auto
-  - name: HongKong - Evoxt
-    type: vmess
-    server: 108.165.100.202
+    server: 38.47.108.44
     port: 9137
     uuid: 531f9aed-9db3-4f42-9efe-ba76ed9c4627
     alterId: 0
@@ -17,5 +10,4 @@ proxy-groups:
   - name: Proxy
     type: select
     proxies:
-      - HongKong - Vmiss
-      - HongKong - Evoxt
+      - HongKong
