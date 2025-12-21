@@ -1,3 +1,5 @@
+mode: rule
+log-level: info
 proxies:
   - name: HongKong
     type: vmess
