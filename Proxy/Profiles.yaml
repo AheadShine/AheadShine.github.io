@@ -13,3 +13,7 @@ proxy-groups:
     type: select
     proxies:
       - HongKong
+      - DIRECT
+rules:
+  - GEOIP,CN,DIRECT
+  - MATCH,Proxy
