@@ -13,4 +13,3 @@ proxy-groups:
     type: select
     proxies:
       - HongKong
-      - DIRECT
