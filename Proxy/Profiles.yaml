@@ -15,7 +15,7 @@ proxy-groups:
       - HongKong
       - DIRECT
 rules:
-  - DOMAIN-SUFFIX,mi.com,DIRECT
+  - DOMAIN-SUFFIX,mi.com,Proxy
   - DOMAIN-SUFFIX,google.com,Proxy
   - DOMAIN-SUFFIX,github.com,Proxy
   - GEOIP,CN,DIRECT
