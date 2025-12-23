@@ -16,5 +16,7 @@ proxy-groups:
       - DIRECT
 rules:
   - DOMAIN-SUFFIX,mi.com,DIRECT
+  - DOMAIN-SUFFIX,google.com,Proxy
+  - DOMAIN-SUFFIX,github.com,Proxy
   - GEOIP,CN,DIRECT
   - MATCH,Proxy
