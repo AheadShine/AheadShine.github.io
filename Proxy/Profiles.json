@@ -18,43 +18,34 @@
   ],
   "outbounds": [
     {
-      "type": "vless",
-      "tag": "vless-out",
-      "server": "example.com",
-      "server_port": 443,
-      "uuid": "your-uuid-here",
-      "flow": "xtls-rprx-vision",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.microsoft.com",
-        "reality": {
-          "enabled": true,
-          "public_key": "your-public-key",
-          "short_id": "your-short-id"
-        }
+      "type": "vmess",
+      "tag": "HongKong",
+      "server": "83.229.125.78",
+      "server_port": 9137,
+      "uuid": "531f9aed-9db3-4f42-9efe-ba76ed9c4627"
       }
     },
     {
       "type": "direct",
-      "tag": "direct"
+      "tag": "Direct"
     },
     {
       "type": "block",
-      "tag": "block"
+      "tag": "Block"
     }
   ],
   "route": {
     "rules": [
       {
         "geoip": "cn",
-        "outbound": "direct"
+        "outbound": "Direct"
       },
       {
         "geosite": "cn",
-        "outbound": "direct"
+        "outbound": "Direct"
       }
     ],
-    "final": "vless-out"
+    "final": "HongKong"
   },
   "experimental": {
     "clash_api": {
