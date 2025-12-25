@@ -8,11 +8,15 @@
       {
         "tag": "Remote",
         "address": "https://1.1.1.1/dns-query",
+        "address_resolver": "Local",
+        "address_strategy": "ipv4_only",
+        "strategy": "ipv4_only",
         "detour": "Proxy"
       },
       {
         "tag": "Local",
         "address": "1.2.4.8",
+        "strategy": "ipv4_only",
         "detour": "Direct"
       }
     ],
