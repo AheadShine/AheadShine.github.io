@@ -27,7 +27,7 @@
   "outbounds": [
     {
       "type": "vmess",
-      "tag": "HongKong",
+      "tag": "Proxy",
       "server": "83.229.125.78",
       "server_port": 9137,
       "uuid": "531f9aed-9db3-4f42-9efe-ba76ed9c4627"
@@ -44,17 +44,40 @@
   "route": {
     "rules": [
       {
-        "geoip": "cn",
+        "ip_is_private": true,
         "outbound": "Direct"
       },
       {
-        "geosite": "cn",
+        "rule_set": "geoip-cn",
+        "outbound": "Direct"
+      },
+      {
+        "rule_set": "geosite-cn",
         "outbound": "Direct"
       }
     ],
-    "final": "HongKong"
+    "rule_set":[
+      {
+        "tag": "geoip-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
+        "download_detour": "Proxy"
+      },
+      {
+        "tag": "geosite-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
+       "download_detour": "Proxy"
+      },
+    ]
+    "final": "Proxy"
   },
   "experimental": {
+    "cache_file": {
+      "enabled": true
+    },
     "clash_api": {
       "external_controller": "127.0.0.1:9090"
     }
