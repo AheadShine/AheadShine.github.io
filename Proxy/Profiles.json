@@ -97,7 +97,7 @@
         "download_detour": "Proxy"
       }
     ],
-    "final": "Proxy",
+    "final": "Direct",
     "auto_detect_interface": true
   }
 }
