@@ -25,10 +25,6 @@
       {
         "rule_set": "geosite-cn",
         "server": "Local"
-      },
-      {
-        "rule_set": "geosite-geolocation-!cn",
-        "server": "Remote"
       }
     ],
     "final": "Remote",
