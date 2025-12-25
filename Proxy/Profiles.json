@@ -55,7 +55,18 @@
     {
       "type": "selector",
       "tag": "proxy",
-      "outbounds": ["auto", "HongKong"]
+      "outbounds": [
+        "Auto",
+        "HongKong"
+      ]
+    },
+    {
+      "type": "urltest",
+      "tag": "Auto",
+      "outbounds": [
+        "HongKong"
+      ],
+      "url": "http://www.gstatic.com/generate_204"
     },
     {
       "type": "vmess",
