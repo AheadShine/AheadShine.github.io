@@ -7,19 +7,13 @@
     "servers": [
       {
         "tag": "remote",
-        "type": "https",
-        "address": "1.1.1.1",
+        "address": "https://1.1.1.1/dns-query",
         "detour": "proxy"
       },
       {
         "tag": "local",
-        "type": "https",
         "address": "1.2.4.8",
         "detour": "direct"
-      },
-      {
-        "tag": "fakeip",
-        "type": "fakeip"
       }
     ],
     "fakeip": {
