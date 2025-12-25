@@ -84,11 +84,11 @@
     "rules": [
       {
         "rule_set": "geosite-cn",
-        "outbound": "direct"
+        "outbound": "Direct"
       },
       {
         "rule_set": "geoip-cn",
-        "outbound": "direct"
+        "outbound": "Direct"
       }
     ],
     "rule_set": [
