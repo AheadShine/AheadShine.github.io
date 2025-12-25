@@ -55,7 +55,7 @@
     {
       "type": "selector",
       "tag": "proxy",
-      "outbounds": ["HongKong", "your-proxy-node2"]
+      "outbounds": ["auto", "HongKong"]
     },
     {
       "type": "vmess",
