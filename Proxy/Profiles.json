@@ -8,12 +8,12 @@
       {
         "tag": "remote",
         "address": "https://1.1.1.1/dns-query",
-        "detour": "proxy"
+        "detour": "Proxy"
       },
       {
         "tag": "local",
         "address": "1.2.4.8",
-        "detour": "direct"
+        "detour": "Direct"
       }
     ],
     "fakeip": {
@@ -54,7 +54,7 @@
   "outbounds": [
     {
       "type": "selector",
-      "tag": "proxy",
+      "tag": "Proxy",
       "outbounds": [
         "Auto",
         "HongKong"
@@ -77,11 +77,7 @@
     },
     {
       "type": "direct",
-      "tag": "direct"
-    },
-    {
-      "type": "block",
-      "tag": "block"
+      "tag": "Direct"
     },
     {
       "type": "dns",
@@ -97,10 +93,6 @@
       {
         "rule_set": "geoip-cn",
         "outbound": "direct"
-      },
-      {
-        "ip_cidr": ["224.0.0.0/4", "240.0.0.0/4"],
-        "outbound": "block"
       }
     ],
     "rule_set": [
@@ -119,7 +111,7 @@
         "download_detour": "direct"
       }
     ],
-    "final": "proxy",
+    "final": "Proxy",
     "auto_detect_interface": true
   }
 }
