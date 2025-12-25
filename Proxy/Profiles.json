@@ -42,11 +42,7 @@
       "auto_route": true,
       "strict_route": true,
       "stack": "system",
-      "platform": {
-        "http_proxy": {
-          "enabled": true
-        }
-      }
+      "sniff": true
     },
     {
       "type": "mixed",
