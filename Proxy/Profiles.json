@@ -23,8 +23,7 @@
         "rule_set": "geosite-cn",
         "server": "Local"
       }
-    ],
-    "final": "Remote"
+    ]
   },
   "inbounds": [
     {
@@ -37,7 +36,7 @@
       "mtu": 1400,
       "auto_route": true,
       "strict_route": true,
-      "stack": "gvisor",
+      "stack": "system",
       "sniff": true
     }
   ],
