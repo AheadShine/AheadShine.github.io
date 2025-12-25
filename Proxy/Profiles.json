@@ -66,9 +66,8 @@
         "format": "binary",
         "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
        "download_detour": "Proxy"
-      },
-    ]
-    "final": "Proxy"
+      }
+    ] 
   },
   "experimental": {
     "cache_file": {
