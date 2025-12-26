@@ -22,7 +22,7 @@
     ],
     "rules": [
       {
-        "outbound": "direct",
+        "rule_set": "geosite-cn",
         "server": "local"
       }
     ],
@@ -38,8 +38,7 @@
       "auto_route": true,
       "strict_route": true,
       "stack": "system",
-      "sniff": true,
-      "sniff_override_destination": true
+      "sniff": true
     }
   ],
   "outbounds": [
@@ -62,15 +61,48 @@
       "tag": "direct"
     }
   ],
+{
   "route": {
+    "rule_set": [
+      {
+        "tag": "geosite-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs"
+      },
+      {
+        "tag": "geoip-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs"
+      },
+      {
+        "tag": "geoip-private",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-private.srs"
+      }
+    ],
     "rules": [
       {
-        "geosite": "cn",
+        "rule_set": "geoip-private",
         "outbound": "direct"
       },
       {
-        "geoip": "cn",
+        "rule_set": "geoip-cn",
         "outbound": "direct"
+      },
+      {
+        "rule_set": "geosite-cn",
+        "outbound": "direct"
+      },
+      {
+        "protocol": "dns",
+        "outbound": "proxy"
+      },
+      {
+        "port": 53,
+        "outbound": "proxy"
       }
     ],
     "final": "proxy",
