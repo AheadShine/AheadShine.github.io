@@ -22,6 +22,7 @@
         "server": "Local"
       }
     ],
+    "final": "Remote",
     "strategy": "ipv4_only"
   },
   "inbounds": [
