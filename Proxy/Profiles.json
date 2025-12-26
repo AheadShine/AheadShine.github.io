@@ -73,7 +73,7 @@
       {
         "rule_set": [
           "geosite-cn",
-          "geoip-cn",
+          "geoip-cn"
         ],
         "outbound": "Direct"
       }
