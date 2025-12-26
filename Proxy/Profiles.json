@@ -26,7 +26,7 @@
         "server": "local"
       }
     ],
-    "final": "remote"
+    "final": "local"
   },
   "inbounds": [
     {
