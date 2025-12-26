@@ -66,10 +66,6 @@
       "type": "direct",
       "tag": "Direct"
     },
-    {
-      "type": "dns",
-      "tag": "DNS"
-    }
   ],
   "route": {
     "rules": [
@@ -80,7 +76,14 @@
       {
         "rule_set": "geoip-cn",
         "outbound": "Direct"
-      }
+      },
+      {
+        "action": "sniff"
+      },
+      {
+      "protocol": "dns",
+      "action": "hijack-dns"
+      },
     ],
     "rule_set": [
       {
