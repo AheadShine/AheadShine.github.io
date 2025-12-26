@@ -18,7 +18,7 @@
     ],
     "rules": [
       {
-        "rule_set": "geosite-cn",
+        "rule_set": "Direct",
         "server": "Local"
       }
     ],
@@ -65,6 +65,10 @@
     {
       "type": "direct",
       "tag": "Direct"
+    },
+    {
+      "type": "dns",
+      "tag": "DNS"
     }
   ],
   "route": {
