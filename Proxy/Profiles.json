@@ -65,10 +65,6 @@
   "route": {
     "rules": [
       {
-        "geoip": "private",
-        "outbound": "direct"
-      },
-      {
         "geosite": "cn",
         "outbound": "direct"
       },
