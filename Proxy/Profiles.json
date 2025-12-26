@@ -21,9 +21,7 @@
         "rule_set": "geosite-cn",
         "server": "Local"
       }
-    ],
-    "final": "Remote",
-    "strategy": "ipv4_only"
+    ]
   },
   "inbounds": [
     {
