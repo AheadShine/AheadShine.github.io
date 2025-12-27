@@ -53,7 +53,7 @@
     }
   ],
   "route": {
-    "rules": ［
+    "rules":［
       {
         "ip_is_private": true,
         "outbound": "direct"
