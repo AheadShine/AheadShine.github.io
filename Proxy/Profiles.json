@@ -46,10 +46,7 @@
       "server_port": 9137,
       "uuid": "531f9aed-9db3-4f42-9efe-ba76ed9c4627",
       "security": "auto",
-      "alter_id": 0,
-      "transport": {
-        "type": "tcp"
-      }
+      "alter_id": 0
     },
     {
       "type": "direct",
