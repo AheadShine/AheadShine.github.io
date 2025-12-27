@@ -8,7 +8,7 @@
       {
         "tag": "remote",
         "address": "tls://8.8.8.8",
-        "detour": "proxy"
+        "detour": "direct"
       },
       {
         "tag": "local",
