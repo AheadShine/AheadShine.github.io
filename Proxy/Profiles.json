@@ -26,7 +26,9 @@
         "server": "local"
       }
     ],
-    "final": "local"
+    "final": "local",
+    "strategy": "prefer_ipv4",
+    "independent_cache": true
   },
   "inbounds": [
     {
@@ -45,7 +47,7 @@
       ],
       "mtu": 9000,
       "auto_route": true,
-      "strict_route": true,
+      "strict_route": false,
       "stack": "system",
       "sniff": true
     }
