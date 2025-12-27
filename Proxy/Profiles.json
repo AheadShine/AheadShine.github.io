@@ -7,8 +7,8 @@
     "servers": [
       {
         "tag": "remote",
-        "address": "tls://8.8.8.8",
-        "detour": "direct"
+        "address": "https://1.1.1.1/dns-query",
+        "detour": "proxy"
       },
       {
         "tag": "local",
