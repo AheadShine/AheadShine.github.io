@@ -6,44 +6,50 @@
   "dns": {
     "servers": [
       {
-        "tag": "remote",
-        "address": "https://1.1.1.1/dns-query",
-        "address_strategy": "ipv4_only",
-        "detour": "HK"
+        "tag": "local",
+        "type": "https",
+        "address": "https://223.5.5.5/dns-query"
       },
       {
-        "tag": "local",
-        "address": "223.5.5.5",
-        "address_strategy": "ipv4_only",
-        "detour": "direct"
+        "tag": "remote",
+        "type": "tls",
+        "address": "tls://8.8.8.8"
       }
     ],
     "rules": [
       {
-        "outbound": "any",
+        "rule_set": "geosite-cn",
         "server": "local"
       }
     ],
-    "strategy": "ipv4_only"
+    "final": "remote"
   },
   "inbounds": [
     {
-      "type": "mixed",
-      "tag": "socks_http_in",
-      "listen": "127.0.0.1",
-      "listen_port": 10808,
-      "sniff": true
+      "type": "tun",
+      "tag": "tun-in",
+      "interface_name": "tun0",
+      "inet4_address": "172.19.0.1/30",
+      "mtu": 9000,
+      "auto_route": true,
+      "strict_route": true,
+      "stack": "system",
+      "sniff": true,
+      "sniff_override_destination": true
     }
   ],
   "outbounds": [
     {
       "type": "vmess",
-      "tag": "HK",
+      "tag": "HongKong",
       "server": "83.229.125.78",
       "server_port": 9137,
       "uuid": "531f9aed-9db3-4f42-9efe-ba76ed9c4627",
       "security": "auto",
-      "alter_id": 0
+      "alter_id": 0,
+      "transport": {
+        "type": "tcp"
+      }
     },
     {
       "type": "direct",
@@ -52,55 +58,45 @@
     {
       "type": "block",
       "tag": "block"
-    },
-    {
-      "type": "dns",
-      "tag": "dns-out"
     }
   ],
   "route": {
-    "geoip": {
-      "path": "geoip.db",
-      "download_url": "https://github.com/SagerNet/sing-geoip/releases/latest/download/geoip.db",
-      "download_detour": "HK"
-    },
-    "geosite": {
-      "path": "geosite.db",
-      "download_url": "https://github.com/SagerNet/sing-geosite/releases/latest/download/geosite.db",
-      "download_detour": "HK"
-    },
     "rules": [
       {
-        "protocol": "dns",
-        "outbound": "dns-out"
+        "ip_is_private": true,
+        "outbound": "direct"
       },
       {
-        "domain_suffix": [
-          "geosite:category-ads-all"
-        ],
-        "outbound": "block"
+        "rule_set": "geoip-cn",
+        "outbound": "direct"
       },
       {
-        "domain_keyword": [
-          "google",
-          "github",
-          "youtube",
-          "twitter"
-        ],
-        "outbound": "HK"
-      },
-      {
-        "domain": [
-          "geosite:cn"
-        ],
-        "geoip": [
-          "cn",
-          "private"
-        ],
+        "rule_set": "geosite-cn",
         "outbound": "direct"
       }
     ],
-    "final": "HK",
-    "auto_detect_interface": true
+    "rule_set": [
+      {
+        "tag": "geoip-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs"
+      },
+      {
+        "tag": "geosite-cn",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs"
+      }
+    ],
+    "final": "HongKong"
+  },
+  "experimental": {
+    "clash_api": {
+      "external_controller": "127.0.0.1:9090"
+    },
+    "cache_file": {
+      "enabled": true
+    }
   }
 }
