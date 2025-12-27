@@ -1,56 +1,40 @@
 {
   "log": {
-    "level": "warn"
+    "level": "info",
+    "timestamp": true
   },
-
   "dns": {
     "servers": [
       {
         "tag": "remote",
-        "address": "https://1.1.1.1/dns-query",
-        "detour": "proxy"
+        "address": "tls://8.8.8.8",
+        "address_strategy": "ipv4_only"
       },
       {
         "tag": "local",
-        "address": "1.2.4.8"
+        "address": "223.5.5.5",
+        "address_strategy": "ipv4_only",
+        "detour": "direct"
       }
     ],
     "rules": [
       {
-        "rule_set": "geosite-cn",
-        "server": "local"
-      },
-      {
-        "rule_set": "geosite-geolocation-!cn",
-        "server": "remote" },
-      {
-        "ip_is_private": true,
+        "outbound": "any",
         "server": "local"
       }
     ],
-    "final": "remote"
+    "strategy": "prefer_ipv4"
   },
-
   "inbounds": [
     {
-      "type": "tun",
-      "tag": "tun-in",
-      "interface_name": "tun0",
-      "mtu": 1280,
-      "address": "172.19.0.1/30",
-      "auto_route": true,
-      "strict_route": true,
-      "stack": "gvisor",
+      "type": "mixed",
+      "tag": "socks_http_in",
+      "listen": "127.0.0.1",
+      "listen_port": 10808,
       "sniff": true
     }
   ],
-
   "outbounds": [
-    {
-      "type": "selector",
-      "tag": "proxy",
-      "outbounds": ["HK", "direct"]
-    },
     {
       "type": "vmess",
       "tag": "HK",
@@ -58,55 +42,68 @@
       "server_port": 9137,
       "uuid": "531f9aed-9db3-4f42-9efe-ba76ed9c4627",
       "security": "auto",
-      "alter_id": 0
+      "alter_id": 0,
+      "transport": {
+        "type": "tcp",
+        "headers": {}
+      }
     },
     {
       "type": "direct",
       "tag": "direct"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    },
+    {
+      "type": "dns",
+      "tag": "dns-out"
     }
   ],
-
   "route": {
+    "geoip": {
+      "path": "geoip.db",
+      "download_url": "https://github.com/SagerNet/sing-geoip/releases/latest/download/geoip.db",
+      "download_detour": "HK"
+    },
+    "geosite": {
+      "path": "geosite.db",
+      "download_url": "https://github.com/SagerNet/sing-geosite/releases/latest/download/geosite.db",
+      "download_detour": "HK"
+    },
     "rules": [
       {
-        "ip_is_private": true,
-        "outbound": "direct" },
-      {
-        "rule_set": "geoip-cn",
-        "outbound": "direct"
+        "protocol": "dns",
+        "outbound": "dns-out"
       },
       {
-        "rule_set": "geosite-cn",
+        "domain_suffix": [
+          "geosite:category-ads-all"
+        ],
+        "outbound": "block"
+      },
+      {
+        "domain_keyword": [
+          "google",
+          "github",
+          "youtube",
+          "twitter"
+        ],
+        "outbound": "HK"
+      },
+      {
+        "domain": [
+          "geosite:cn"
+        ],
+        "geoip": [
+          "cn",
+          "private"
+        ],
         "outbound": "direct"
       }
     ],
-    "rule_set": [
-      {
-        "tag": "geosite-cn",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs"
-      },
-      {
-        "tag": "geoip-cn",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs"
-      },
-      {
-        "tag": "geosite-geolocation-!cn",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-!cn.srs"
-      }
-    ],
-    "final": "proxy",
+    "final": "HK",
     "auto_detect_interface": true
-  },
-
-  "experimental": {
-    "cache_file": {
-      "enabled": true
-    }
   }
 }
