@@ -30,13 +30,11 @@
       "tag": "tun-in",
       "interface_name": "tun0",
       "inet4_address": ["172.19.0.1/30"],
-      "inet4_route_exclude_address": ["172.19.0.1/30", "83.229.125.78/32"],
-      "mtu": 9000,
+      "mtu": 1400,
       "auto_route": true,
       "strict_route": true,
       "stack": "system",
-      "sniff": true,
-      "sniff_override_destination": true
+      "sniff": true
     }
   ],
   "outbounds": [
@@ -52,18 +50,10 @@
     {
       "type": "direct",
       "tag": "direct"
-    },
-    {
-      "type": "block",
-      "tag": "block"
     }
   ],
   "route": {
-    "rules": [
-      {
-        "ip_cidr": ["83.229.125.78/32"],
-        "outbound": "direct"
-      },
+    "rules": ［
       {
         "ip_is_private": true,
         "outbound": "direct"
