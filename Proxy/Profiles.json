@@ -101,7 +101,7 @@
         "type": "remote",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-non-cn.srs",
-        "download_detour": "direct"
+        "download_detour": "proxy"
       }
     ],
     "rules": [
