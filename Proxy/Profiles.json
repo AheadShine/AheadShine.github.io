@@ -1,8 +1,8 @@
 {
   "log": {
-    "level": "warn",
-    "timestamp": true
+    "level": "warn"
   },
+
   "dns": {
     "servers": [
       {
@@ -12,11 +12,7 @@
       },
       {
         "tag": "local",
-        "address": "114.114.114.114"
-      },
-      {
-        "tag": "block",
-        "address": "rcode://refused"
+        "address": "1.2.4.8"
       }
     ],
     "rules": [
@@ -26,39 +22,34 @@
       },
       {
         "rule_set": "geosite-geolocation-!cn",
-        "server": "remote"
-      },
+        "server": "remote" },
       {
         "ip_is_private": true,
         "server": "local"
       }
     ],
-    "final": "remote",
-    "strategy": "prefer_ipv4"
+    "final": "remote"
   },
+
   "inbounds": [
     {
       "type": "tun",
-      "tag": "tun-in",
-      "interface_name": "tun0",
-      "address": ["172.19.0.1/30", "fdfe:dcba:9876::1/126"],
-      "mtu": 1400,
+      "mtu": 1280,
       "auto_route": true,
       "strict_route": true,
-      "stack": "system",
-      "sniff": true,
-      "sniff_override_destination": true
+      "sniff": true
     }
   ],
+
   "outbounds": [
     {
       "type": "selector",
       "tag": "proxy",
-      "outbounds": ["HongKong", "direct"]
+      "outbounds": ["HK", "direct"]
     },
     {
       "type": "vmess",
-      "tag": "HongKong",
+      "tag": "HK",
       "server": "83.229.125.78",
       "server_port": 9137,
       "uuid": "531f9aed-9db3-4f42-9efe-ba76ed9c4627",
@@ -68,18 +59,14 @@
     {
       "type": "direct",
       "tag": "direct"
-    },
-    {
-      "type": "block",
-      "tag": "block"
     }
   ],
+
   "route": {
     "rules": [
       {
         "ip_is_private": true,
-        "outbound": "direct"
-      },
+        "outbound": "direct" },
       {
         "rule_set": "geoip-cn",
         "outbound": "direct"
@@ -112,6 +99,7 @@
     "final": "proxy",
     "auto_detect_interface": true
   },
+
   "experimental": {
     "cache_file": {
       "enabled": true
