@@ -116,7 +116,7 @@
     ],
     "final": "proxy",
     "auto_detect_interface": true
-  }
+  },
   "experimental": {
     "cache_file": {
       "enabled": true
