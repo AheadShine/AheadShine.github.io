@@ -76,7 +76,7 @@
         "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs"
       }
     ],
-    "rules": }
+    "rules": [
       {
         "rule_set": "geoip-cn",
         "outbound": "direct"
