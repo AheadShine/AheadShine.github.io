@@ -1,6 +1,6 @@
 {
   "log": {
-    "level": "info",
+    "level": "debug",
     "timestamp": true
   },
   "dns": {
@@ -30,6 +30,7 @@
       "tag": "tun-in",
       "interface_name": "tun0",
       "inet4_address": ["172.19.0.1/30"],
+      "inet4_route_exclude_address": ["172.19.0.1/30", "83.229.125.78/32"],
       "mtu": 9000,
       "auto_route": true,
       "strict_route": true,
@@ -59,6 +60,10 @@
   ],
   "route": {
     "rules": [
+      {
+        "ip_cidr": ["83.229.125.78/32"],
+        "outbound": "direct"
+      },
       {
         "ip_is_private": true,
         "outbound": "direct"
