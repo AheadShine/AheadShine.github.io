@@ -24,6 +24,14 @@
       {
         "rule_set": "geosite-cn",
         "server": "local"
+      },
+      {
+        "geosite": "geolocation-!cn",
+        "server": "remote"
+      },
+      {
+        "ip_is_private": true,
+        "server": "local"
       }
     ],
     "final": "remote",
@@ -47,7 +55,7 @@
       ],
       "mtu": 9000,
       "auto_route": true,
-      "strict_route": false,
+      "strict_route": true,
       "stack": "system",
       "sniff": true
     }
