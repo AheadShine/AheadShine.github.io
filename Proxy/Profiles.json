@@ -26,7 +26,7 @@
         "server": "local"
       },
       {
-        "geosite": "geolocation-!cn",
+        "rule_set": "geosite-non-cn",
         "server": "remote"
       },
       {
@@ -112,18 +112,14 @@
       {
         "rule_set": "geosite-cn",
         "outbound": "direct"
-      },
-      {
-        "rule_set": "geosite-non-cn",
-        "server": "remote"
-      },
+      }
     ],
     "final": "proxy",
-    "auto_detect_interface": true,
-    "experimental": {
-      "cache_file": {
-        "enabled": true
-        }
-    }
+    "auto_detect_interface": true
+  }
+  "experimental": {
+    "cache_file": {
+      "enabled": true
+      }
   }
 }
