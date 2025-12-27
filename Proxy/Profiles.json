@@ -40,6 +40,7 @@
       ],
       "auto_route": true,
       "strict_route": true,
+      "stack": "gvisor",
       "sniff": true
     }
   ],
