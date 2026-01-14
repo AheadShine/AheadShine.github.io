@@ -113,7 +113,8 @@
         }
       },
       "multiplex": {
-        "enabled": true
+        "enabled": true,
+        "padding": true
       }
     },
     {
