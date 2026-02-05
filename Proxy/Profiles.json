@@ -6,40 +6,38 @@
   "dns": {
     "servers": [
       {
-        "tag": "LocalResolver",
-        "address": "1.2.4.8",
-        "detour": "Direct"
+        "type": "udp",
+        "tag": "resolver",
+        "server": "223.5.5.5"
       },
       {
-        "tag": "Local",
-        "address": "https://doh.pub/dns-query",
-        "address_resolver": "LocalResolver",
-        "detour": "Direct"
+        "type": "https",
+        "tag": "local",
+        "domain_resolver": "resolver",
+        "server": "doh.pub"
       },
       {
-        "tag": "Remote",
-        "address": "https://1.1.1.1/dns-query",
-        "address_resolver": "LocalResolver",
-        "detour": "Proxy"
+        "type": "h3",
+        "tag": "remote",
+        "detour": "Proxy",
+        "domain_resolver": "resolver",
+        "server": "dns.google"
       }
     ],
     "rules": [
       {
-        "rule_set": "GeoSite-Geolocation-!CN",
-        "server": "Remote"
+        "rule_set": "geosite-google",
+        "server": "remote"
       },
       {
-        "rule_set": [
-          "GeoSite-CN",
-          "GeoIP-CN",
-          "GeoSite-Geolocation-CN"
-        ],
-        "server": "Local"
+        "rule_set": "geosite-cn",
+        "server": "local"
       }
     ],
-    "final": "Remote",
+    "final": "remote",
     "strategy": "prefer_ipv4",
-    "independent_cache": true
+    "independent_cache": true,
+    "client_subnet": "1.0.1.0"
   },
   "inbounds": [
     {
@@ -133,58 +131,48 @@
         "outbound": "Direct"
       },
       {
-        "rule_set": "GeoSite-Geolocation-!CN",
+        "rule_set": "geosite-google",
         "outbound": "Proxy"
       },
       {
-        "rule_set": "GeoIP-CN",
+        "rule_set": "geoip-cn",
         "outbound": "Direct"
       },
       {
-        "rule_set": "GeoSite-Geolocation-CN",
-        "outbound": "Direct"
-      },
-      {
-        "rule_set": "GeoSite-CN",
+        "rule_set": "geosite-cn",
         "outbound": "Direct"
       }
     ],
     "rule_set": [
       {
         "type": "remote",
-        "tag": "GeoIP-CN",
-        "format": "binary",
+        "tag": "geoip-cn",
         "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
         "download_detour": "Proxy",
         "update_interval": "168h0m0s"
       },
       {
         "type": "remote",
-        "tag": "GeoSite-CN",
-        "format": "binary",
+        "tag": "geosite-cn",
         "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
         "download_detour": "Proxy",
         "update_interval": "168h0m0s"
       },
       {
         "type": "remote",
-        "tag": "GeoSite-Geolocation-CN",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-cn.srs",
-        "download_detour": "Proxy",
-        "update_interval": "168h0m0s"
-      },
-      {
-        "type": "remote",
-        "tag": "GeoSite-Geolocation-!CN",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-!cn.srs",
+        "tag": "geosite-google",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-google.srs",
         "download_detour": "Proxy",
         "update_interval": "168h0m0s"
       }
     ],
     "final": "Proxy",
-    "auto_detect_interface": true
+    "auto_detect_interface": true,
+    "default_domain_resolver": {
+      "server": "local",
+      "rewrite_ttl": 60,
+      "client_subnet": "1.0.1.0"
+    }
   },
   "experimental": {
     "cache_file": {
