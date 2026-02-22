@@ -6,25 +6,26 @@
   "dns": {
     "servers": [
       {
-        "type": "udp",
-        "tag": "resolver",
-        "server": "223.5.5.5"
-      },
-      {
         "type": "https",
         "tag": "local",
-        "domain_resolver": "resolver",
-        "server": "doh.pub"
+        "server": "223.5.5.5"
       },
       {
         "type": "h3",
         "tag": "remote",
         "detour": "Proxy",
-        "domain_resolver": "resolver",
-        "server": "dns.google"
+        "server": "1.1.1.1"
       }
     ],
     "rules": [
+      {
+        "clash_mode": "Global",
+        "server": "remote"
+      },
+      {
+        "clash_mode": "Direct",
+        "server": "local"
+      },
       {
         "rule_set": "geosite-google",
         "server": "remote"
@@ -59,6 +60,10 @@
       ],
       "auto_route": true,
       "strict_route": true,
+      "route_exclude_address": [
+        "192.168.0.0/16",
+        "fc00::/7"
+      ],
       "stack": "system",
       "platform": {
         "http_proxy": {
@@ -131,6 +136,14 @@
         "outbound": "Direct"
       },
       {
+        "clash_mode": "Direct",
+        "outbound": "Direct"
+      },
+      {
+        "clash_mode": "Global",
+        "outbound": "Proxy"
+      },
+      {
         "rule_set": "geosite-google",
         "outbound": "Proxy"
       },
@@ -170,8 +183,7 @@
     "auto_detect_interface": true,
     "default_domain_resolver": {
       "server": "local",
-      "rewrite_ttl": 60,
-      "client_subnet": "1.0.1.0"
+      "rewrite_ttl": 60
     }
   },
   "experimental": {
