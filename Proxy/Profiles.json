@@ -14,7 +14,7 @@
         "type": "https",
         "tag": "remote",
         "detour": "Proxy",
-        "server": "dns.google"
+        "server": "1.1.1.1"
       }
     ],
     "rules": [
@@ -25,6 +25,10 @@
       {
         "clash_mode": "Direct",
         "server": "local"
+      },
+      {
+        "rule_set": "geosite-google",
+        "server": "remote"
       },
       {
         "rule_set": "geosite-cn",
@@ -40,16 +44,30 @@
       "type": "tun",
       "tag": "tun-in",
       "interface_name": "tun0",
-      "mtu": 1500,
+      "mtu": 1420,
       "address": [
         "172.19.0.1/30",
         "fdfe:dcba:9876::1/126"
       ],
       "auto_route": true,
-      "strict_route": true,
-      "stack": "system",
-      "sniff": true,
-      "sniff_override_destination": true
+      "route_exclude_address": [
+        "192.168.0.0/16",
+        "172.16.0.0/12",
+        "10.0.0.0/8",
+        "fc00::/7"
+      ],
+      "exclude_package": [
+        "com.unionpay",
+        "com.xingin.xhs",
+        "com.tencent.mm",
+        "com.taobao.taobao",
+        "com.deepseek.chat",
+        "com.autonavi.minimap",
+        "com.mutangtech.qianji",
+        "com.jingdong.app.mall",
+        "com.eg.android.AlipayGphone"
+      ],
+      "stack": "system"
     }
   ],
   "outbounds": [
@@ -68,7 +86,7 @@
       "outbounds": [
         "🇭🇰 HongKong"
       ],
-      "url": "http://www.gstatic.com/generate_204",
+      "url": "http://cp.cloudflare.com/generate_204",
       "interval": "10m0s",
       "tolerance": 50
     },
@@ -90,10 +108,6 @@
           "public_key": "A-HXoUCNA9bgGC96mB8_1N7pW7oz0Ne3c-Df_K1imAk",
           "short_id": "af20b15f23ad54a8"
         }
-      },
-      "multiplex": {
-        "enabled": true,
-        "padding": true
       }
     },
     {
@@ -104,7 +118,12 @@
   "route": {
     "rules": [
       {
-        "port": 53,
+        "inbound": "tun-in",
+        "action": "sniff",
+        "timeout": "150ms"
+      },
+      {
+        "protocol": "dns",
         "action": "hijack-dns"
       },
       {
@@ -120,14 +139,15 @@
         "outbound": "Proxy"
       },
       {
-        "rule_set": [
-          "geoip-cn",
-          "geosite-cn"
-        ],
-        "outbound": "Direct"
+        "rule_set": "geosite-google",
+        "outbound": "Proxy"
       },
       {
-        "outbound": "Proxy"
+        "rule_set": [
+          "geosite-cn",
+          "geoip-cn"
+        ],
+        "outbound": "Direct"
       }
     ],
     "rule_set": [
@@ -142,6 +162,13 @@
         "type": "remote",
         "tag": "geosite-cn",
         "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
+        "download_detour": "Proxy",
+        "update_interval": "168h0m0s"
+      },
+      {
+        "type": "remote",
+        "tag": "geosite-google",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-google.srs",
         "download_detour": "Proxy",
         "update_interval": "168h0m0s"
       }
