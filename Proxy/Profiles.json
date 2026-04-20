@@ -36,7 +36,7 @@
       }
     ],
     "final": "remote",
-    "strategy": "prefer_ipv4",
+    "strategy": "ipv4_only",
     "independent_cache": true
   },
   "inbounds": [
@@ -63,9 +63,7 @@
         "com.xingin.xhs",
         "com.tencent.mm",
         "com.taobao.taobao",
-        "com.deepseek.chat",
         "com.autonavi.minimap",
-        "com.mutangtech.qianji",
         "com.jingdong.app.mall",
         "com.eg.android.AlipayGphone"
       ],
